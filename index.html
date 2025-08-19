@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诡仙斋：镜中仙 - 中国风解谜游戏</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'ZCOOL QingKe HuangYou', cursive;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 100%);
+            color: #e8e8e8;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 5px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: rgba(10, 10, 30, 0.9);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #4a206d;
+        }
+        
+        .logo {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: #e8e8e8;
+            text-shadow: 0 0 10px rgba(100, 0, 255, 0.7);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            text-align: center;
+            color: #b39ddb;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #e8e8e8;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(100, 0, 255, 0.3);
+            text-shadow: 0 0 5px rgba(200, 150, 255, 0.8);
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(0, 0, 30, 0.7), rgba(0, 0, 10, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%234a206d" width="100" height="100"/><path fill="%23331c46" d="M0 0L100 100M100 0L0 100"/></svg>');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(100, 0, 255, 0.8);
+            color: #e8e8e8;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+            color: #b39ddb;
+        }
+        
+        .cta-button {
+            background: linear-gradient(to bottom, #5a2f8d, #3a1f5d);
+            color: #e8e8e8;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(100, 0, 255, 0.5);
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(150, 100, 255, 0.7);
+        }
+        
+        /* 游戏介绍部分 */
+        .section-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 40px 0;
+            color: #e8e8e8;
+            text-shadow: 0 0 10px rgba(100, 0, 255, 0.5);
+        }
+        
+        .game-intro {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .intro-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: rgba(20, 10, 40, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .intro-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #b39ddb;
+        }
+        
+        .intro-text p {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .intro-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #3a1f5d, #2a1245);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #b39ddb;
+            height: 300px;
+        }
+        
+        /* 角色展示部分 */
+        .characters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        
+        .character-card {
+            width: 280px;
+            background: linear-gradient(to bottom, #3a1f5d, #2a1245);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .character-image {
+            height: 200px;
+            background-color: #4a206d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b39ddb;
+            font-size: 1.2rem;
+        }
+        
+        .character-info {
+            padding: 20px;
+        }
+        
+        .character-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #e8e8e8;
+        }
+        
+        .character-info p {
+            color: #b39ddb;
+        }
+        
+        /* 游戏特点部分 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .feature {
+            background-color: rgba(20, 10, 40, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #b39ddb;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #e8e8e8;
+        }
+        
+        .feature p {
+            color: #b39ddb;
+        }
+        
+        /* 游戏容器样式 */
+        #game-container {
+            max-width: 1000px;
+            height: 70vh;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: rgba(10, 10, 30, 0.85);
+            box-shadow: 0 0 20px rgba(100, 0, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        #scene-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #333;
+        }
+        
+        #dialogue-container {
+            height: 30vh;
+            padding: 20px;
+            background-color: rgba(0, 0, 20, 0.8);
+            border-top: 3px solid #4a206d;
+            position: relative;
+        }
+        
+        #dialogue-text {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+            min-height: 60%;
+        }
+        
+        #choices-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .choice-btn {
+            background: linear-gradient(to bottom, #3a1f5d, #2a1245);
+            color: #e8e8e8;
+            border: 1px solid #6b4f8d;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        
+        .choice-btn:hover {
+            background: linear-gradient(to bottom, #4a2f6d, #3a1f55);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(150, 100, 255, 0.7);
+        }
+        
+        #character-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .character {
+            text-align: center;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .character.active {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .character-img {
+            width: 120px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(100, 0, 255, 0.5));
+        }
+        
+        .character-name {
+            margin-top: 5px;
+            font-size: 1.1em;
+            color: #b39ddb;
+        }
+        
+        #evidence-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(20, 10, 40, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #6b4f8d;
+            max-width: 300px;
+        }
+        
+        #evidence-title {
+            font-size: 1.1em;
+            color: #b39ddb;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        #evidence-list {
+            list-style-type: none;
+        }
+        
+        #evidence-list li {
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px dashed #4a206d;
+            font-size: 0.9em;
+        }
+        
+        .scene-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        #start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 30, 0.9), rgba(0, 0, 10, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%234a206d" width="100" height="100"/><path fill="%23331c46" d="M0 0L100 100M100 0L0 100"/></svg>');
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        #game-title {
+            font-size: 3.5em;
+            color: #e8e8e8;
+            text-shadow: 0 0 10px rgba(100, 0, 255, 0.7);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        #start-btn {
+            background: linear-gradient(to bottom, #5a2f8d, #3a1f5d);
+            color: #e8e8e8;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(100, 0, 255, 0.5);
+        }
+        
+        #start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(150, 100, 255, 0.7);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .text-typing {
+            overflow: hidden;
+            border-right: 2px solid #b39ddb;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #b39ddb }
+        }
+        
+        #debate-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(20, 10, 40, 0.95);
+            padding: 20px;
+            border: 3px solid #6b4f8d;
+            border-radius: 10px;
+            width: 80%;
+            z-index: 10;
+            display: none;
+        }
+        
+        #debate-text {
+            font-size: 1.4em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
+        
+        #debate-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .debate-option {
+            background: linear-gradient(to bottom, #3a1f5d, #2a1245);
+            color: #e8e8e8;
+            border: 1px solid #6b4f8d;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .debate-option:hover {
+            background: linear-gradient(to bottom, #4a2f6d, #3a1f55);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(150, 100, 255, 0.7);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: rgba(10, 10, 30, 0.9);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 2px solid #4a206d;
+            margin-top: 40px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: #b39ddb;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #6b4f8d;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+            
+            #game-container {
+                height: 80vh;
+            }
+            
+            #dialogue-text {
+                font-size: 1.1em;
+            }
+            
+            .character-img {
+                width: 80px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">诡仙斋：镜中仙</div>
+            <div class="tagline">中国风解谜网页游戏 - 探索校园怪谈，解开镜中秘密</div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">游戏介绍</a></li>
+                    <li><a href="#characters">角色</a></li>
+                    <li><a href="#features">游戏特点</a></li>
+                    <li><a href="#play">开始游戏</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h1>揭开镜中的秘密</h1>
+            <p>在一所被古老诅咒笼罩的学校里，探索中国鬼怪传说，解开镜中仙的秘密，拯救被困的同学...</p>
+            <button class="cta-button" onclick="scrollToGame()">开始游戏</button>
+        </section>
+        
+        <section id="intro">
+            <h2 class="section-title">游戏介绍</h2>
+            <div class="game-intro">
+                <div class="intro-text">
+                    <h3>神秘校园传说</h3>
+                    <p>《诡仙斋：镜中仙》是一款以中国鬼怪传说为背景的解谜网页游戏。游戏发生在一所被古老诅咒笼罩的学校里，最近发生了多起奇怪的失踪事件。</p>
+                    <p>玩家将扮演一名普通高中生，偶然发现学校中隐藏的秘密：一面古老的镜子里住着一位"镜中仙"，她会引诱学生进入镜中世界...</p>
+                    <p>探索校园，收集线索，与同学对话，最终在言辩对决中揭开真相！</p>
+                </div>
+                <div class="intro-image">
+                    游戏场景预览
+                </div>
+            </div>
+        </section>
+        
+        <section id="characters">
+            <h2 class="section-title">游戏角色</h2>
+            <div class="characters">
+                <div class="character-card">
+                    <div class="character-image">主角立绘</div>
+                    <div class="character-info">
+                        <h3>林晓梅</h3>
+                        <p>游戏主角，能够感知到超自然现象的高中生。偶然发现了镜中仙的秘密，决定调查同学失踪的真相。</p>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-image">镜中仙立绘</div>
+                    <div class="character-info">
+                        <h3>镜中仙</h3>
+                        <p>被困在镜中的灵魂，几十年前在学校失踪的女生。她的灵魂被困在镜中，会引诱学生进入镜中世界。</p>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-image">陈老师立绘</div>
+                    <div class="character-info">
+                        <h3>陈老师</h3>
+                        <p>学校的语文老师，对校园传说有所了解。会向主角提供关于镜中仙传说的重要线索。</p>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <div class="character-image">张明远立绘</div>
+                    <div class="character-info">
+                        <h3>张明远</h3>
+                        <p>失踪学生的好友，掌握着关键信息但一开始不愿透露。需要主角赢得信任后才能获得帮助。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="features">
+            <h2 class="section-title">游戏特点</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>言辩对决系统</h3>
+                    <p>借鉴《弹丸论破》的言辩对决系统，使用收集到的证据射击矛盾言论，揭露真相。</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h3>探索与解谜</h3>
+                    <p>在校园中自由探索，收集线索，与NPC对话，解开镜中仙的秘密。</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">👻</div>
+                    <h3>中国风恐怖</h3>
+                    <p>基于中国民间传说和鬼怪故事，营造独特的东方恐怖氛围。</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎭</div>
+                    <h3>多结局系统</h3>
+                    <p>根据玩家的选择和表现，游戏会有多种不同的结局，增加重玩价值。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="play">
+            <h2 class="section-title">开始游戏</h2>
+            <div id="game-container">
+                <div id="scene-container">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23111' width='800' height='450'/><path fill='%23222' d='M0,0 L800,450 M800,0 L0,450'/></svg>" class="scene-bg" id="scene-bg">
+                    
+                    <div id="character-container">
+                        <div class="character" id="character-1">
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='180' viewBox='0 0 120 180'><rect fill='%23333' width='120' height='180'/><circle fill='%23555' cx='60' cy='50' r='30'/><rect fill='%23555' x='35' y='80' width='50' height='70'/></svg>" class="character-img" id="char-img-1">
+                            <div class="character-name" id="char-name-1">林晓梅</div>
+                        </div>
+                        <div class="character" id="character-2">
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='180' viewBox='0 0 120 180'><rect fill='%23444' width='120' height='180'/><circle fill='%23666' cx='60' cy='50' r='30'/><rect fill='%23666' x='35' y='80' width='50' height='70'/></svg>" class="character-img" id="char-img-2">
+                            <div class="character-name" id="char-name-2">陈老师</div>
+                        </div>
+                        <div class="character" id="character-3">
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='180' viewBox='0 0 120 180'><rect fill='%23555' width='120' height='180'/><circle fill='%23777' cx='60' cy='50' r='30'/><rect fill='%23777' x='35' y='80' width='50' height='70'/></svg>" class="character-img" id="char-img-3">
+                            <div class="character-name" id="char-name-3">张明远</div>
+                        </div>
+                    </div>
+                    
+                    <div id="evidence-container">
+                        <div id="evidence-title">收集到的线索</div>
+                        <ul id="evidence-list"></ul>
+                    </div>
+                    
+                    <div id="debate-container">
+                        <div id="debate-text">镜中仙：我从未伤害过任何人，我只是在寻找陪伴！</div>
+                        <div id="debate-options">
+                            <div class="debate-option" data-correct="true">破碎的镜子边缘有血迹</div>
+                            <div class="debate-option" data-correct="false">镜子上有水渍</div>
+                            <div class="debate-option" data-correct="false">镜子里的倒影在微笑</div>
+                            <div class="debate-option" data-correct="false">镜框上有精美雕刻</div>
+                        </div>
+                    </div>
+                    
+                    <div id="start-screen">
+                        <h1 id="game-title">诡仙斋：镜中仙</h1>
+                        <button id="start-btn">开始游戏</button>
+                    </div>
+                </div>
+                
+                <div id="dialogue-container">
+                    <div id="dialogue-text">欢迎来到《诡仙斋：镜中仙》。这是一所被古老诅咒笼罩的学校，最近发生了奇怪的失踪事件。据说，一面古老的镜子里住着一位"镜中仙"，她会引诱学生进入镜中世界...</div>
+                    <div id="choices-container">
+                        <!-- 选项将由JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">隐私政策</a>
+                <a href="#">用户协议</a>
+                <a href="#">常见问题</a>
+                <a href="#">联系我们</a>
+            </div>
+            <div class="copyright">© 2025 诡仙斋：镜中仙 版权所有</div>
+        </div>
+    </footer>
+
+    <script>
+        // 游戏状态
+        const gameState = {
+            currentScene: 0,
+            collectedEvidence: [],
+            currentDialogue: 0,
+            hasMetSpirit: false,
+            hasSolvedPuzzle: false
+        };
+
+        // 游戏剧本数据
+        const gameScript = {
+            scenes: [
+                {
+                    id: 0,
+                    name: "学校走廊",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23333' width='800' height='450'/><path fill='%23444' d='M0,200 L800,200 M0,250 L800,250 M0,300 L800,300'/><rect fill='%22555' x='100' y='100' width='100' height='150'/><rect fill='%22555' x='300' y='100' width='100' height='150'/><rect fill='%22555' x='500' y='100' width='100' height='150'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "你站在空无一人的学校走廊里。夕阳的余晖透过窗户洒在地板上，投下长长的阴影。",
+                            choices: [
+                                { text: "调查教室", next: 1 },
+                                { text: "去教师办公室", next: 2 },
+                                { text: "查看洗手间", next: 3 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 1,
+                    name: "教室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23444' width='800' height='450'/><rect fill='%23555' x='50' y='50' width='700' height='350' rx='10' ry='10'/><rect fill='%23666' x='100' y='100' width='50' height='50'/><rect fill='%23666' x='200' y='100' width='50' height='50'/><rect fill='%23666' x='300' y='100' width='50' height='50'/><rect fill='%23666' x='400' y='100' width='50' height='50'/><rect fill='%23666' x='500' y='100' width='50' height='50'/><rect fill='%23666' x='600' y='100' width='50' height='50'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "教室里空无一人，桌椅整齐地排列着。你注意到最后一排的桌子上有一本日记。",
+                            choices: [
+                                { text: "查看日记", next: 4, evidence: "学生的日记" },
+                                { text: "离开教室", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "教师办公室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23555' width='800' height='450'/><rect fill='%23666' x='50' y='50' width='200' height='100'/><rect fill='%23666' x='300' y='50' width='200' height='100'/><rect fill='%23666' x='550' y='50' width='200' height='100'/><rect fill='%23666' x='50' y='200' width='200' height='100'/><rect fill='%23666' x='300' y='200' width='200' height='100'/><rect fill='%23666' x='550' y='200' width='200' height='100'/></svg>",
+                    dialogues: [
+                        {
+                            character: "陈老师",
+                            text: "哦，你还没回家啊？最近学校不太平，有个学生昨天失踪了。校长说可能和那个'镜中仙'的传说有关。",
+                            choices: [
+                                { text: "询问镜中仙的详情", next: 5, evidence: "镜中仙传说" },
+                                { text: "询问失踪学生", next: 6 },
+                                { text: "离开办公室", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: "洗手间",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23666' width='800' height='450'/><rect fill='%23777' x='100' y='50' width='200' height='100'/><rect fill='%23777' x='400' y='50' width='200' height='100'/><rect fill='%23777' x='100' y='200' width='200' height='100'/><rect fill='%23777' x='400' y='200' width='200' height='100'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "洗手间里异常安静，水滴声清晰可闻。最里面的隔间门微微开着，里面似乎有什么东西在反光。",
+                            choices: [
+                                { text: "查看反光的物体", next: 7 },
+                                { text: "离开洗手间", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: "教室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23444' width='800' height='450'/><rect fill='%23555' x='50' y='50' width='700' height='350' rx='10' ry='10'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "日记上写着：'我发现那面镜子真的有问题。昨晚我清楚地看到里面的人影对我笑了。李同学说他也看到了，今天他却没来学校...'",
+                            choices: [
+                                { text: "继续阅读", next: 8 },
+                                { text: "合上日记", next: 1 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 5,
+                    name: "教师办公室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23555' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "陈老师",
+                            text: "据说几十年前，有个女生在这所学校里失踪了。她的灵魂被困在一面镜子里，会引诱学生进入镜中世界。学校的地下室有一面古老的镜子，据说就是'镜中仙'的栖身之所。",
+                            choices: [
+                                { text: "询问地下室位置", next: 9 },
+                                { text: "感谢老师并离开", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 6,
+                    name: "教师办公室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23555' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "陈老师",
+                            text: "失踪的学生叫李明，是高三(2)班的学生。他平时很安静，不太与人交往。昨天放学后就没再见过他。",
+                            choices: [
+                                { text: "询问镜中仙的详情", next: 5 },
+                                { text: "感谢老师并离开", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 7,
+                    name: "洗手间",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23666' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "你走近隔间，发现一面精致的手持镜。当你拿起它时，镜面突然发出诡异的光芒，一个模糊的人影出现在镜中。",
+                            choices: [
+                                { text: "继续观察", next: 10 },
+                                { text: "扔掉镜子", next: 3 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 8,
+                    name: "教室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23666' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "日记上写着：'快跑！！！！！！",
+                            choices: [
+                                { text: "合上日记", next: 1 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 9,
+                    name: "教师办公室",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><rect fill='%23666' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "陈老师",
+                            text: "在学校后面，有一个地下室，现在已经被封死了，进不去的。",
+                            choices: [
+                                { text: "询问镜中仙的详情", next: 5 },
+                                { text: "感谢老师并离开", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 10,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,0,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad)' width='800' height='450'/><circle cx='400' cy='225' r='100' fill='rgba(255,255,255,0.1)'/><circle cx='400' cy='225' r='50' fill='rgba(255,255,255,0.2)'/><circle cx='400' cy='225' r='25' fill='rgba(255,255,255,0.3)'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "终于有人找到我了...我已经孤独了太久。你想知道失踪学生的下落吗？",
+                            choices: [
+                                { text: "是的，告诉我！", next: 11 },
+                                { text: "你到底是什么？", next: 12 },
+                                { text: "打破镜子", next: 13 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 11,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad2' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(50,0,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad2)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "他们都在这里，在镜中世界陪伴我。但你得先证明你值得知道真相。回答我的问题：我为什么会被困在镜中？",
+                            choices: [
+                                { text: "因为你做了坏事", next: 14 },
+                                { text: "因为一场意外", next: 15, evidence: "镜中仙的过去" },
+                                { text: "因为你自愿选择", next: 16 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 12,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,0,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad)' width='800' height='450'/><circle cx='400' cy='225' r='100' fill='rgba(255,255,255,0.1)'/><circle cx='400' cy='225' r='50' fill='rgba(255,255,255,0.2)'/><circle cx='400' cy='225' r='25' fill='rgba(255,255,255,0.3)'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "我是什么，我是鬼啊，哈哈哈哈！",
+                            choices: [
+                                { text: "告诉我学生的下落", next: 11 },
+                                { text: "打破镜子", next: 13 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 13,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,0,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad)' width='800' height='450'/><circle cx='400' cy='225' r='100' fill='rgba(255,255,255,0.1)'/><circle cx='400' cy='225' r='50' fill='rgba(255,255,255,0.2)'/><circle cx='400' cy='225' r='25' fill='rgba(255,255,255,0.3)'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "你打破了镜子，镜子破碎里面飘出了黑雾",
+                            choices: [
+                                { text: "END", next: 25 }
+                           ]
+                        }
+                    ]
+                },
+                {
+                    id: 14,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,0,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad)' width='800' height='450'/><circle cx='400' cy='225' r='100' fill='rgba(255,255,255,0.1)'/><circle cx='400' cy='225' r='50' fill='rgba(255,255,255,0.2)'/><circle cx='400' cy='225' r='25' fill='rgba(255,255,255,0.3)'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "我做了坏事？别搞笑了,当初是谁把我囚禁在这里的,你们不都很清楚吗？",
+                            choices: [
+                                { text: "因为一场意外", next: 15, evidence: "镜中仙的过去" },
+                                { text: "因为你自愿选择", next: 16 }
+                           ]
+                        }
+                    ]
+                },
+                {
+                    id: 15,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad3' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(50,50,0);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad3)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "接近了...但还不够。这是一场仪式的结果，一场为了永葆青春而进行的黑暗仪式。但出了差错，我的灵魂被困在了镜中。",
+                            choices: [
+                                { text: "谁进行了这个仪式？", next: 17 },
+                                { text: "如何解救你？", next: 18 },
+                                { text: "那些学生在哪里？", next: 19 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 16,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,0,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad)' width='800' height='450'/><circle cx='400' cy='225' r='100' fill='rgba(255,255,255,0.1)'/><circle cx='400' cy='225' r='50' fill='rgba(255,255,255,0.2)'/><circle cx='400' cy='225' r='25' fill='rgba(255,255,255,0.3)'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "没搞清楚就不要来这里，你在找死。",
+                            choices: [
+                                { text: "因为一场意外", next: 15, evidence: "镜中仙的过去" },
+                                { text: "因为你自愿选择", next: 16 }
+                           ]
+                        }
+                    ]
+                },
+                {
+                    id: 17,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad3' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(50,50,0);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad3)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "是你们，是你们所有人，是这个学校的所有，一切！！！！",
+                            choices: [
+                                { text: "如何解救你？", next: 18 },
+                                { text: "那些学生在哪里？", next: 19 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 18,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad3' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(50,50,0);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad3)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "我为什么要告诉你。",
+                            choices: [
+                               { text: "谁进行了这个仪式？", next: 17 },
+                                { text: "那些学生在哪里？", next: 19 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 19,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad4' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,50,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad4)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "他们就在这里，但你看不到。只有当你完全进入镜中世界，才能见到他们。你想加入他们吗？",
+                            choices: [
+                                { text: "是的，我想见他们", next: 20 },
+                                { text: "不，这不对劲", next: 21 },
+                                { text: "提出质疑", next: 22 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 20,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad4' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,50,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad4)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "那就来吧！！",
+                            choices: [
+                                { text: "不，这不对劲", next: 21 },
+                                { text: "提出质疑", next: 22 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 21,
+                    name: "镜中世界",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad4' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,50,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad4)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: ".......快来吧",
+                            choices: [
+                                { text: "是的,我想见他们", next: 20 },
+                                { text: "提出质疑", next: 22 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 22,
+                    name: "言辩对决",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='debateGrad' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(50,0,0);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#debateGrad)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "你竟敢质疑我？那么让我们来一场对决吧！用你收集到的证据来反驳我的言论!",
+                            choices: [
+                                { text: "开始言辩对决", next: 23, action: "startDebate" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 23,
+                    name: "言辩对决",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='debateGrad2' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,50,0);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#debateGrad2)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "镜中仙",
+                            text: "你无法击败我！我在这里已经几十年了！",
+                            choices: [
+                                { text: "使用证据反驳", next: 24, action: "debateSuccess" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 24,
+                    name: "洗手间",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad4' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,50,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad4)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "你成功了,成功驱逐了镜中仙,这个学校也终于安全了",
+                            choices: [
+                                { text: "感谢游玩", next: 0 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 25,
+                    name: "洗手间",
+                    background: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'><defs><radialGradient id='mirrorGrad4' cx='50%' cy='50%' r='50%' fx='50%' fy='50%'><stop offset='0%' style='stop-color:rgb(0,50,50);stop-opacity:1' /><stop offset='100%' style='stop-color:rgb(0,0,0);stop-opacity:1' /></radialGradient></defs><rect fill='url(#mirrorGrad4)' width='800' height='450'/></svg>",
+                    dialogues: [
+                        {
+                            character: "旁白",
+                            text: "唯一一次的失败机会,你死了",
+                            choices: [
+                                { text: "重新选择", next: 10 }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // 初始化游戏
+        document.getElementById('start-btn').addEventListener('click', startGame);
+        
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            loadScene(0);
+        }
+        
+        function loadScene(sceneId) {
+            const scene = gameScript.scenes.find(s => s.id === sceneId);
+            if (!scene) return;
+            
+            gameState.currentScene = sceneId;
+            
+            // 更新背景
+            document.getElementById('scene-bg').src = scene.background;
+            
+            // 加载对话
+            loadDialogue(scene.dialogues[0]);
+        }
+        
+        function loadDialogue(dialogue) {
+            const dialogueText = document.getElementById('dialogue-text');
+            const choicesContainer = document.getElementById('choices-container');
+            
+            // 显示对话文本
+            dialogueText.textContent = `${dialogue.character}：${dialogue.text}`;
+            
+            // 清除旧选项
+            choicesContainer.innerHTML = '';
+            
+            // 添加新选项
+            dialogue.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.textContent = choice.text;
+                button.addEventListener('click', () => {
+                    if (choice.evidence && !gameState.collectedEvidence.includes(choice.evidence)) {
+                        gameState.collectedEvidence.push(choice.evidence);
+                        updateEvidenceList();
+                    }
+                    
+                    if (choice.action === 'startDebate') {
+                        startDebate();
+                    } else if (choice.action === 'debateSuccess') {
+                        debateSuccess();
+                    } else {
+                        loadScene(choice.next);
+                    }
+                });
+                choicesContainer.appendChild(button);
+            });
+        }
+        
+        function updateEvidenceList() {
+            const evidenceList = document.getElementById('evidence-list');
+            evidenceList.innerHTML = '';
+            
+            gameState.collectedEvidence.forEach(evidence => {
+                const li = document.createElement('li');
+                li.textContent = evidence;
+                evidenceList.appendChild(li);
+            });
+        }
+        
+        function startDebate() {
+            const debateContainer = document.getElementById('debate-container');
+            debateContainer.style.display = 'block';
+            
+            const options = document.querySelectorAll('.debate-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    if (this.dataset.correct === 'true') {
+                        debateSuccess();
+                    } else {
+                        debateFail();
+                    }
+                });
+            });
+        }
+        
+        function debateSuccess() {
+            const debateContainer = document.getElementById('debate-container');
+            debateContainer.style.display = 'none';
+            
+            // 加载成功场景
+            alert("言辩成功！你揭穿了镜中仙的谎言！");
+            loadScene(24); // 成功场景ID
+        }
+        
+        function debateFail() {
+            const debateText = document.getElementById('debate-text');
+            debateText.textContent = "错误的选择！镜中仙的力量增强了！再试一次！";
+            
+            // 可以添加更多失败逻辑
+        }
+        
+        // 初始化证据列表
+        updateEvidenceList();
+        
+        // 简单的页面滚动效果
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 滚动到游戏部分
+        function scrollToGame() {
+            document.getElementById('play').scrollIntoView({ behavior: 'smooth' });
+            startGame();
+        }
+        
+        // 角色卡片悬停效果增强
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 0 20px rgba(100, 0, 255, 0.7)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.4)';
+            });
+        });
+    </script>
+</body>
+</html>
