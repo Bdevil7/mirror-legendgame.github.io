@@ -1,2 +1,2 @@
-# Bdevil7.github.io
+# mirror.github.io
 a little game
